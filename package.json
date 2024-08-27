@@ -11,8 +11,9 @@
     "express": "~4.16.1",
     "http-errors": "~1.6.3",
     "jade": "~1.11.0",
-    "morgan": "~1.9.1",
-    "pg": "^8.12.0",
-    "sequelize": "^6.37.3"
+    "morgan": "~1.9.1"
+  },
+  "devDependencies": {
+    "sequelize-cli": "6.6.2"
   }
 }
