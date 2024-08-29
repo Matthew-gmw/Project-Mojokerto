@@ -1,24 +1,18 @@
-"use strict";
+'use strict';
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable("User", {
+    await queryInterface.createTable('Pengerjaan', {
       id: {
         allowNull: false,
         primaryKey: true,
-        type: Sequelize.UUID,
+        type: Sequelize.UUID
       },
-      username: {
-        type: Sequelize.STRING,
-        allowNull: false,
+      id_assessment: {
+        type: Sequelize.UUID
       },
-      password: {
-        type: Sequelize.STRING,
-        allowNull: false,
-      },
-      user_access: {
-        type: Sequelize.UUID,
-        allowNull: false,
+      jumlah_peserta: {
+        type: Sequelize.INTEGER
       },
       createdBy: {
         allowNull: false,
@@ -30,15 +24,15 @@ module.exports = {
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE,
+        type: Sequelize.DATE
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE,
-      },
+        type: Sequelize.DATE
+      }
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable("User");
-  },
+    await queryInterface.dropTable('Pengerjaan');
+  }
 };

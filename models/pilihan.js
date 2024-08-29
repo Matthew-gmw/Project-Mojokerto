@@ -1,9 +1,8 @@
-"use strict";
-const { Model } = require("sequelize");
+'use strict';
+const {  Model } = require('sequelize');
 const moment = require("moment-timezone");
-
 module.exports = (sequelize, DataTypes) => {
-  class User extends Model {
+  class Pilihan extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -13,37 +12,31 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  User.init(
+  Pilihan.init(
     {
       id: {
-        primaryKey: true,
         allowNull: false,
+        primaryKey: true,
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
       },
-      username: {
-        type: DataTypes.STRING,
+      id_soal: {
+        type: DataTypes.UUID,
         allowNull: false,
       },
-      password: {
-        type: DataTypes.STRING,
+      url_asset:{
+        type: DataTypes.UUID,
         allowNull: false,
-      },
-      user_access: {
-        type: DataTypes.STRING,
-        allowNull: false,
-      },
+      }, 
       createdBy: {
         type: DataTypes.STRING,
       },
       updatedBy: {
         type: DataTypes.STRING,
       },
-    },
-
-    {
-      sequelize,
-      tableName: "User",
+  }, {
+    sequelize,
+      tableName: "Pilihan",
       hooks: {
         beforeCreate: (instance, options) => {
           instance.createdBy = options.userId;
@@ -53,21 +46,21 @@ module.exports = (sequelize, DataTypes) => {
           instance.updatedBy = options.userId;
         },
       },
-    }
-  );
-  User.prototype.toJSON = function () {
-    const values = { ...this.get() };
-    if (values.createdAt) {
-      values.createdAt = moment(values.createdAt)
-        .tz("Asia/Jakarta")
-        .format("YYYY-MM-DDHH:mm:ss");
-    }
-    if (values.updatedAt) {
-      values.updatedAt = moment(values.updatedAt)
-        .tz("Asia/Jakarta")
-        .format("YYYY-MM-DDHH:mm:ss");
-    }
-    return values;
-  };
-  return User;
+  }
+);
+User.prototype.toJSON = function () {
+  const values = { ...this.get() };
+  if (values.createdAt) {
+    values.createdAt = moment(values.createdAt)
+      .tz("Asia/Jakarta")
+      .format("YYYY-MM-DDHH:mm:ss");
+  }
+  if (values.updatedAt) {
+    values.updatedAt = moment(values.updatedAt)
+      .tz("Asia/Jakarta")
+      .format("YYYY-MM-DDHH:mm:ss");
+  }
+  return values;
+}
+  return Pilihan;
 };

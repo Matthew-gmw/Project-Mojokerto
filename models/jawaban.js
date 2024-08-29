@@ -1,9 +1,8 @@
 "use strict";
 const { Model } = require("sequelize");
 const moment = require("moment-timezone");
-
 module.exports = (sequelize, DataTypes) => {
-  class User extends Model {
+  class Jawaban extends Model {
     /**
      * Helper method for defining associations.
      * This method is not a part of Sequelize lifecycle.
@@ -13,24 +12,28 @@ module.exports = (sequelize, DataTypes) => {
       // define association here
     }
   }
-  User.init(
+  Jawaban.init(
     {
       id: {
-        primaryKey: true,
         allowNull: false,
+        primaryKey: true,
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
       },
-      username: {
-        type: DataTypes.STRING,
+      id_assessment: {
+        type: DataTypes.UUID,
         allowNull: false,
       },
-      password: {
-        type: DataTypes.STRING,
+      id_soal: {
+        type: DataTypes.UUID,
         allowNull: false,
       },
-      user_access: {
-        type: DataTypes.STRING,
+      id_user: {
+        type: DataTypes.UUID,
+        allowNull: false,
+      },
+      id_pilihan: {
+        type: DataTypes.UUID,
         allowNull: false,
       },
       createdBy: {
@@ -40,10 +43,9 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.STRING,
       },
     },
-
     {
       sequelize,
-      tableName: "User",
+      tableName: "Jawaban",
       hooks: {
         beforeCreate: (instance, options) => {
           instance.createdBy = options.userId;
@@ -69,5 +71,5 @@ module.exports = (sequelize, DataTypes) => {
     }
     return values;
   };
-  return User;
+  return Jawaban;
 };
