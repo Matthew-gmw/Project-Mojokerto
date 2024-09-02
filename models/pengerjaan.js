@@ -1,5 +1,5 @@
-'use strict';
-const { Model } = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 const moment = require("moment-timezone");
 module.exports = (sequelize, DataTypes) => {
   class Pengerjaan extends Model {
@@ -9,6 +9,12 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
+      Pengerjaan.hasMany(models.Assessment, {
+        foreignKey: "id_assessment",
+      });
+      Pengerjaan.belongsTo(models.PengerjaanDetail, {
+        foreignKey: "id_pengerjaan",
+      });
       // define association here
     }
   }
@@ -34,9 +40,9 @@ module.exports = (sequelize, DataTypes) => {
       updatedBy: {
         type: DataTypes.STRING,
       },
-  }, 
-  {
-    sequelize,
+    },
+    {
+      sequelize,
       tableName: "Pengerjaan",
       hooks: {
         beforeCreate: (instance, options) => {
@@ -47,21 +53,21 @@ module.exports = (sequelize, DataTypes) => {
           instance.updatedBy = options.userId;
         },
       },
-  }
-);
-User.prototype.toJSON = function () {
-  const values = { ...this.get() };
-  if (values.createdAt) {
-    values.createdAt = moment(values.createdAt)
-      .tz("Asia/Jakarta")
-      .format("YYYY-MM-DDHH:mm:ss");
-  }
-  if (values.updatedAt) {
-    values.updatedAt = moment(values.updatedAt)
-      .tz("Asia/Jakarta")
-      .format("YYYY-MM-DDHH:mm:ss");
-  }
-  return values;
-};
+    }
+  );
+  Pengerjaan.prototype.toJSON = function () {
+    const values = { ...this.get() };
+    if (values.createdAt) {
+      values.createdAt = moment(values.createdAt)
+        .tz("Asia/Jakarta")
+        .format("YYYY-MM-DDHH:mm:ss");
+    }
+    if (values.updatedAt) {
+      values.updatedAt = moment(values.updatedAt)
+        .tz("Asia/Jakarta")
+        .format("YYYY-MM-DDHH:mm:ss");
+    }
+    return values;
+  };
   return Pengerjaan;
 };

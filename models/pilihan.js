@@ -1,5 +1,5 @@
-'use strict';
-const {  Model } = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 const moment = require("moment-timezone");
 module.exports = (sequelize, DataTypes) => {
   class Pilihan extends Model {
@@ -9,6 +9,12 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
+      Pilihan.hasMany(models.Soal, {
+        foreignKey: "id_soal",
+      });
+      Pilihan.belongsTo(models.Jawaban, {
+        foreignKey: "id_pilihan",
+      });
       // define association here
     }
   }
@@ -24,18 +30,19 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.UUID,
         allowNull: false,
       },
-      url_asset:{
+      url_asset: {
         type: DataTypes.UUID,
         allowNull: false,
-      }, 
+      },
       createdBy: {
         type: DataTypes.STRING,
       },
       updatedBy: {
         type: DataTypes.STRING,
       },
-  }, {
-    sequelize,
+    },
+    {
+      sequelize,
       tableName: "Pilihan",
       hooks: {
         beforeCreate: (instance, options) => {
@@ -46,21 +53,21 @@ module.exports = (sequelize, DataTypes) => {
           instance.updatedBy = options.userId;
         },
       },
-  }
-);
-User.prototype.toJSON = function () {
-  const values = { ...this.get() };
-  if (values.createdAt) {
-    values.createdAt = moment(values.createdAt)
-      .tz("Asia/Jakarta")
-      .format("YYYY-MM-DDHH:mm:ss");
-  }
-  if (values.updatedAt) {
-    values.updatedAt = moment(values.updatedAt)
-      .tz("Asia/Jakarta")
-      .format("YYYY-MM-DDHH:mm:ss");
-  }
-  return values;
-}
+    }
+  );
+  Pilihan.prototype.toJSON = function () {
+    const values = { ...this.get() };
+    if (values.createdAt) {
+      values.createdAt = moment(values.createdAt)
+        .tz("Asia/Jakarta")
+        .format("YYYY-MM-DDHH:mm:ss");
+    }
+    if (values.updatedAt) {
+      values.updatedAt = moment(values.updatedAt)
+        .tz("Asia/Jakarta")
+        .format("YYYY-MM-DDHH:mm:ss");
+    }
+    return values;
+  };
   return Pilihan;
 };

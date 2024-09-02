@@ -1,5 +1,5 @@
-'use strict';
-const { Model } = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 const moment = require("moment-timezone");
 module.exports = (sequelize, DataTypes) => {
   class PengerjaanDetail extends Model {
@@ -9,6 +9,9 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
+      PengerjaanDetail.hasMany(models.Pengerjaan, {
+        foreignKey: "id_pengerjaan",
+      });
       // define association here
     }
   }
@@ -20,11 +23,11 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.UUID,
         defaultValue: DataTypes.UUIDV4,
       },
-      id_pengerjaan:{
+      id_pengerjaan: {
         type: DataTypes.UUID,
         allowNull: false,
-      }, 
-      id_user:{
+      },
+      id_user: {
         type: DataTypes.UUID,
         allowNull: false,
       },
@@ -34,8 +37,9 @@ module.exports = (sequelize, DataTypes) => {
       updatedBy: {
         type: DataTypes.STRING,
       },
-  }, {
-    sequelize,
+    },
+    {
+      sequelize,
       tableName: "PengerjaanDetail",
       hooks: {
         beforeCreate: (instance, options) => {
@@ -46,21 +50,21 @@ module.exports = (sequelize, DataTypes) => {
           instance.updatedBy = options.userId;
         },
       },
-  }
-);
-User.prototype.toJSON = function () {
-  const values = { ...this.get() };
-  if (values.createdAt) {
-    values.createdAt = moment(values.createdAt)
-      .tz("Asia/Jakarta")
-      .format("YYYY-MM-DDHH:mm:ss");
-  }
-  if (values.updatedAt) {
-    values.updatedAt = moment(values.updatedAt)
-      .tz("Asia/Jakarta")
-      .format("YYYY-MM-DDHH:mm:ss");
-  }
-  return values;
-}
+    }
+  );
+  PengerjaanDetail.prototype.toJSON = function () {
+    const values = { ...this.get() };
+    if (values.createdAt) {
+      values.createdAt = moment(values.createdAt)
+        .tz("Asia/Jakarta")
+        .format("YYYY-MM-DDHH:mm:ss");
+    }
+    if (values.updatedAt) {
+      values.updatedAt = moment(values.updatedAt)
+        .tz("Asia/Jakarta")
+        .format("YYYY-MM-DDHH:mm:ss");
+    }
+    return values;
+  };
   return PengerjaanDetail;
 };

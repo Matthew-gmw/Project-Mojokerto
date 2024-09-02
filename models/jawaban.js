@@ -9,6 +9,18 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
+      Jawaban.belongsTo(models.User, {
+        foreignKey: "id_user",
+      });
+      Jawaban.belongsTo(models.Assessment, {
+        foreignKey: "id_assessment",
+      });
+      Jawaban.belongsTo(models.Soal, {
+        foreignKey: "id_soal",
+      });
+      Jawaban.belongsTo(models.Pilihan, {
+        foreignKey: "id_pilihan",
+      });
       // define association here
     }
   }
@@ -57,7 +69,7 @@ module.exports = (sequelize, DataTypes) => {
       },
     }
   );
-  User.prototype.toJSON = function () {
+  Jawaban.prototype.toJSON = function () {
     const values = { ...this.get() };
     if (values.createdAt) {
       values.createdAt = moment(values.createdAt)

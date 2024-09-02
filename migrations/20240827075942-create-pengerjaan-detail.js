@@ -1,18 +1,34 @@
-'use strict';
+"use strict";
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('PengerjaanDetail', {
+    await queryInterface.createTable("PengerjaanDetail", {
       id: {
         allowNull: false,
         primaryKey: true,
-        type: Sequelize.INTEGER
+        type: Sequelize.UUID,
       },
       id_pengerjaan: {
-        type: Sequelize.UUID
+        type: Sequelize.UUID,
+        allowNull: false,
+        onDelete: "CASCADE",
+        references: {
+          model: {
+            tableName: "Pengerjaan",
+          },
+          key: "id",
+        },
       },
       id_user: {
-        type: Sequelize.UUID
+        type: Sequelize.UUID,
+        allowNull: false,
+        onDelete: "CASCADE",
+        references: {
+          model: {
+            tableName: "User",
+          },
+          key: "id",
+        },
       },
       createdBy: {
         allowNull: false,
@@ -24,15 +40,15 @@ module.exports = {
       },
       createdAt: {
         allowNull: false,
-        type: Sequelize.DATE
+        type: Sequelize.DATE,
       },
       updatedAt: {
         allowNull: false,
-        type: Sequelize.DATE
-      }
+        type: Sequelize.DATE,
+      },
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('PengerjaanDetail');
-  }
+    await queryInterface.dropTable("PengerjaanDetail");
+  },
 };

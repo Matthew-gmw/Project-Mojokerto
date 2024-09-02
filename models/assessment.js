@@ -10,6 +10,15 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
+      Assessment.hasMany(models.Soal, {
+        foreignKey: "id_assessment",
+      });
+      Assessment.hasMany(models.Jawaban, {
+        foreignKey: "id_assessment",
+      });
+      Assessment.hasMany(models.Pengerjaan, {
+        foreignKey: "id_assessment",
+      });
       // define association here
     }
   }
@@ -46,7 +55,7 @@ module.exports = (sequelize, DataTypes) => {
       },
     }
   );
-  User.prototype.toJSON = function () {
+  Assessment.prototype.toJSON = function () {
     const values = { ...this.get() };
     if (values.createdAt) {
       values.createdAt = moment(values.createdAt)
