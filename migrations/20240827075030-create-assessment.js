@@ -11,12 +11,10 @@ module.exports = {
       nilai: {
         type: Sequelize.INTEGER,
       },
-      createdBy: {
-        allowNull: false,
+      createdBy: {    
         type: Sequelize.STRING,
       },
       updatedBy: {
-        allowNull: false,
         type: Sequelize.STRING,
       },
       createdAt: {

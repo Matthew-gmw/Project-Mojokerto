@@ -1,7 +1,4 @@
 "use strict";
-
-const assessment = require("../models/assessment");
-
 /** @type {import('sequelize-cli').Migration} */
 module.exports = {
   async up(queryInterface, Sequelize) {
@@ -34,11 +31,9 @@ module.exports = {
         type: Sequelize.STRING,
       },
       createdBy: {
-        allowNull: false,
         type: Sequelize.STRING,
       },
       updatedBy: {
-        allowNull: false,
         type: Sequelize.STRING,
       },
       createdAt: {

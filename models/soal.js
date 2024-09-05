@@ -1,5 +1,6 @@
 "use strict";
 const { Model } = require("sequelize");
+const moment = require("moment-timezone");
 module.exports = (sequelize, DataTypes) => {
   class Soal extends Model {
     /**
@@ -8,13 +9,13 @@ module.exports = (sequelize, DataTypes) => {
      * The `models/index` file will call this method automatically.
      */
     static associate(models) {
-      Soal.hasMany(models.Assessment, {
+      Soal.belongsTo(models.Assessment, {
         foreignKey: "id_assessment",
       });
-      Soal.belongsTo(models.Pilihan, {
+      Soal.hasMany(models.Pilihan, {
         foreignKey: "id_soal",
       });
-      Soal.belongsTo(models.Jawaban, {
+      Soal.hasMany(models.Jawaban, {
         foreignKey: "id_soal",
       });
       // define association here
