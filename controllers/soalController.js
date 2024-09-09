@@ -32,12 +32,12 @@ exports.getAll = async (req, res) => {
 exports.update = async (req, res) => {
   try {
     const body = req.body;
-    const cekSoal = await Soal.findbyPk(body.id);
+    const cekSoal = await Soal.findByPk(body.id);
     if (!cekSoal) {
       return resError(res, 400, "SOAL TIDAK DAPAT DITEMUKAN");
     }
     const up = await cekSoal.update(body);
-    return resSukses(res, 200, "SOAL BERHASIL DIUPDATE");
+    return resSukses(res, 200, "SOAL BERHASIL DIUPDATE", up);
   } catch (error) {
     console.error(error);
     return resError(res, 500, "TERJADI KESALAHAN SERVER");
@@ -46,10 +46,10 @@ exports.update = async (req, res) => {
 exports.delete = async (req, res) => {
   try {
     const { id } = req.query;
-    const cekSoal = await Soal.findbyPk(id);
+    const cekSoal = await Soal.findByPk(id);
     if (cekSoal) {
       await cekSoal.destroy({ where: id });
-      return resSukses(res, 200, "SOAL BERHASIL DIHAPUS");
+      return resSukses(res, 200, "SOAL BERHASIL DIHAPUS", cekSoal);
     }
     return resError(res, 400, "SOAL TIDAK DITEMUKAN");
   } catch (error) {

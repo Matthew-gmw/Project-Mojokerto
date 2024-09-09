@@ -16,6 +16,6 @@ const soalRouter = require("./soalRoutes");
 router.use("/soal", soalRouter);
 // ROUTER PILIHAN
 const pilihanRouter = require("./pilihanRoutes");
-// router.use("/pilihan", pilihanRouter);
+router.use("/pilihan", pilihanRouter);
 
 module.exports = router;
