@@ -3,7 +3,7 @@ var router = express.Router();
 const assessmentController = require("../controllers/assesmentController");
 
 router.post("/create", assessmentController.create);
-router.post("/getAll", assessmentController.getAll);
+router.get("/getAll", assessmentController.getAll);
 router.put("/update", assessmentController.update);
 router.delete("/delete", assessmentController.delete);
 

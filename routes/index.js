@@ -17,5 +17,11 @@ router.use("/soal", soalRouter);
 // ROUTER PILIHAN
 const pilihanRouter = require("./pilihanRoutes");
 router.use("/pilihan", pilihanRouter);
+// ROUTER JAWABAN
+const jawabanRouter = require("./jawabanRoutes");
+router.use("/jawaban", jawabanRouter);
+// ROUTER PENGERJAAN
+const pengerjaanRouter = require("./pengerjaanRoutes");
+router.use("/pengerjaan", pengerjaanRouter);
 
 module.exports = router;

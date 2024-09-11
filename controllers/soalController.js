@@ -24,7 +24,7 @@ exports.getAll = async (req, res) => {
     if (soal.length === 0) {
       return resError(res, 400, "SOAL TIDAK DITEMUKAN");
     }
-    return resSukses(res, 200, "SOAL BERHASIL DIBUAT");
+    return resSukses(res, 200, "SOAL BERHASIL DIBUAT", soal);
   } catch (error) {
     return resError(res, 500, "TERJADI KESALAHAN SERVER");
   }

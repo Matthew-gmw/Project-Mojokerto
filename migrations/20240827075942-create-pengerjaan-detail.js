@@ -22,7 +22,6 @@ module.exports = {
       id_user: {
         type: Sequelize.UUID,
         allowNull: false,
-        onDelete: "CASCADE",
         references: {
           model: {
             tableName: "User",
@@ -31,11 +30,9 @@ module.exports = {
         },
       },
       createdBy: {
-        allowNull: false,
         type: Sequelize.STRING,
       },
       updatedBy: {
-        allowNull: false,
         type: Sequelize.STRING,
       },
       createdAt: {
